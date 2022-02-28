@@ -1,8 +1,9 @@
 package org.inlighting.security;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SecurityDemoApplication {
@@ -13,5 +14,12 @@ public class SecurityDemoApplication {
 
         SpringApplication.run(SecurityDemoApplication.class, args);
     }
+
+	@PostConstruct
+	public void startDBManager() {
+		System.setProperty("java.awt.headless", "false");
+		org.hsqldb.util.DatabaseManagerSwing.main(new String[] { "--url", "jdbc:hsqldb:mem:testdb_Spring-Boot-Security-Data-Thymeleaf-Demo", "--noexit" });
+	}
+
 }
 
